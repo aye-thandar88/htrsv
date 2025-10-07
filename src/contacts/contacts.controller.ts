@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ContactsService } from './contacts.service';
 import { CreateContactDto } from './dto/create-contact.dto';
 
@@ -7,12 +7,17 @@ export class ContactsController {
     constructor(private contactsService: ContactsService) { }
 
     @Post()
-    create(@Body() dto: CreateContactDto) {
-        return this.contactsService.create(dto);
+    async create(@Body() dto: CreateContactDto) {
+        return await this.contactsService.create(dto);
     }
 
     @Get()
-    findAll() {
-        return this.contactsService.findAll();
+    async findAll() {
+        return await this.contactsService.findAll();
+    }
+
+    @Get(':id')
+    async findOne(@Param('id') id: string) {
+        return await this.contactsService.findOne(id);
     }
 }

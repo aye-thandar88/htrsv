@@ -12,6 +12,7 @@ export class AccessStrategy extends PassportStrategy(Strategy, 'jwt') {
     }
 
     async validate(payload: any) {
-        return payload;
+        // 👇 This object becomes req.user
+        return { sub: payload.sub, email: payload.email, isAdmin: payload.isAdmin };
     }
 }

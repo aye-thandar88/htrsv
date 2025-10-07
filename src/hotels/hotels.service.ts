@@ -17,15 +17,21 @@ export class HotelsService {
         return hotel;
     }
 
-    create(dto: CreateHotelDto) {
+    async create(dto: CreateHotelDto) {
         return this.prisma.hotel.create({ data: dto });
     }
 
-    update(id: string, dto: UpdateHotelDto) {
+    insertMany(dto: CreateHotelDto[]) {
+        return this.prisma.hotel.createMany({ data: dto, skipDuplicates: true });
+    }
+
+    async update(id: string, dto: UpdateHotelDto) {
+        await this.findOne(id);
         return this.prisma.hotel.update({ where: { id }, data: dto });
     }
 
-    remove(id: string) {
+    async remove(id: string) {
+        await this.findOne(id);
         return this.prisma.hotel.delete({ where: { id } });
     }
 }

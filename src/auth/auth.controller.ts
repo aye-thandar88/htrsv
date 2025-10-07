@@ -3,8 +3,8 @@ import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { Request } from 'express';
-import { RefreshStrategy } from './strategies/refresh.strategy';
-import { AccessStrategy } from './strategies/access.strategy';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
 
 export interface AuthenticatedRequest extends Request {
     user?: any;
@@ -26,17 +26,19 @@ export class AuthController {
         return this.authService.login(user);
     }
 
-    @UseGuards(RefreshStrategy)
+    @UseGuards(JwtAuthGuard)
     @Post('refresh')
     async refresh(@Req() req: AuthenticatedRequest) {
         const user = req.user;
         return this.authService.refresh(user.sub, user.refreshToken);
     }
 
-    @UseGuards(AccessStrategy)
+    @ApiBearerAuth()
+    @UseGuards(JwtAuthGuard)
     @Post('logout')
     async logout(@Req() req: AuthenticatedRequest) {
         const user = req.user;
-        return this.authService.logout(user.sub);
+        await this.authService.logout(user.sub);
+        return { message: 'Logged out successfully' };
     }
 }

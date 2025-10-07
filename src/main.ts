@@ -8,7 +8,7 @@ async function bootstrap() {
 
   // Swagger config
   const config = new DocumentBuilder()
-    .setTitle('Yangon Hotel Directory API')
+    .setTitle('Hotel Directory API')
     .setDescription('API documentation for Hotels, Auth, and Contact modules')
     .setVersion('1.0')
     .addBearerAuth() // enables JWT auth in Swagger UI
@@ -28,7 +28,7 @@ async function bootstrap() {
 
   // ✅ Enable CORS (for React frontend)
   app.enableCors({
-    origin: '*', // (you can restrict to your frontend domain later)
+    origin: ['http://localhost:5173'], // (you can restrict to your frontend domain later)
     credentials: true,
   });
 

@@ -5,6 +5,9 @@ export class CreateHotelDto {
     @ApiProperty({ example: 'hello' })
     @IsString() name: string;
 
+    @ApiProperty({ example: '' })
+    @IsOptional() @IsString() description?: string;
+
     @ApiProperty({ example: 'Yangon' })
     @IsString() address: string;
 
@@ -14,6 +17,12 @@ export class CreateHotelDto {
     @ApiProperty({ example: '' })
     @IsOptional() @IsString() image?: string;
 
-    @ApiProperty({ example: '5' })
+    @ApiProperty({ example: '' })
+    @IsOptional() @IsString() package?: string;
+
+    @ApiProperty({ example: 20 })
+    @IsOptional() @IsNumber() discount?: number;
+
+    @ApiProperty({ example: 5 })
     @IsOptional() @IsNumber() rating?: number;
 }
