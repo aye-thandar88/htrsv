@@ -7,9 +7,18 @@ import { AuthModule } from './auth/auth.module';
 import { HotelsModule } from './hotels/hotels.module';
 import { ContactsModule } from './contacts/contacts.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { PackagesModule } from './packages/packages.module';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), UsersModule, AuthModule, HotelsModule, ContactsModule, PrismaModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    UsersModule,
+    AuthModule,
+    HotelsModule,
+    ContactsModule,
+    PrismaModule,
+    PackagesModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -1,5 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsOptional, IsNumber } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsString, IsOptional, IsNumber, IsArray, ValidateNested } from 'class-validator';
+import { CreatePackageDto } from 'src/packages/dto/create-package.dto';
 
 export class CreateHotelDto {
     @ApiProperty({ example: 'hello' })
@@ -25,4 +27,7 @@ export class CreateHotelDto {
 
     @ApiProperty({ example: 5 })
     @IsOptional() @IsNumber() rating?: number;
+
+    @ApiProperty({ example: ["package-id-1", "package-id-2"]}) 
+    @IsOptional() @IsArray() packageIds?: string[];
 }

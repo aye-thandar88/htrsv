@@ -31,6 +31,12 @@
 $ npm install
 ```
 
+## to generate the Prisma Client. 
+
+```bash
+# development
+$ prisma generate
+
 ## Compile and run the project
 
 ```bash
